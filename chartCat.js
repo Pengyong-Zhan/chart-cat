@@ -348,7 +348,7 @@ Highcharts.chart("lineChart", {
   yAxis: [
     {
       title: {
-        text: 'Admit Rate (%)'
+        text: 'Admit Rate'
       },
       lineWidth: 1,
       tickWidth: 0.5, 
@@ -356,6 +356,9 @@ Highcharts.chart("lineChart", {
       max: 50,
       tickInterval: 2.5, 
       gridLineWidth: 0,
+      labels: {
+        format: '{value}%'
+      }
     },
     {
       title: {
