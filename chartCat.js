@@ -134,6 +134,9 @@ Highcharts.chart('pieChartWithDrilldown', {
       cursor: 'pointer',
     }
   },
+  tooltip: {
+    enabled: false
+  },
   series: [
     {
         name: 'Vendamos E-commerce',
@@ -244,6 +247,9 @@ Highcharts.chart('columnAndLine', {
       yAxis: 1,
       color: yellowColor,
       zIndex: 3,
+      tooltip: {
+        pointFormat: '<span style="color: {series.color}">\u25CF</span>{series.name}: <b>{(multiplyBy100 point.y):.1f}%</b>'
+      },
       data: [0.4, 0.26, 0.19, 0.85, 0.83, 0.48, 0.29, 0.62, 0.45, 0.55, 0.6, 0.15, 0.14, 0.19, 0.29],
     }
   ]
@@ -451,6 +457,9 @@ Highcharts.chart('scatterChart', {
       lineWidth: 1
     },
   },
+  tooltip: {
+    shared: true
+  },
   legend: {
     layout: 'vertical',
     align: 'right',
@@ -505,7 +514,7 @@ Highcharts.chart("waterfall", {
     type: 'waterfall',
   },
   title: {
-    text: 'Department headcount in 2023'
+    text: 'Department Headcount in 2023'
   },
   xAxis: {
     type: 'category',
@@ -623,18 +632,24 @@ Highcharts.chart('bubbleChart', {
     gridLineWidth: 1,
     title: {
       text: 'Years of Construction'
-    }
+    },
+    lineColor:lightGrayColor,
+    tickColor: lightGrayColor,
+    tickLength: 0
   },
   legend: {
     verticalAlign: 'top'
   },
   yAxis: {
     title: {
-      text: 'Estimated Value'
+      text: 'Area (m\u00B2)'//sup
     },
     labels: {
-      format: '{value}K'
+      format: '{value}'
     }
+  },
+  tooltip: {
+    format: '<span style="color:{series.color}">\u25CF</span> {series.name} <br> ({point.x}, {point.y}), Estimated Value: ${point.z}K'
   },
   series: [
     {
