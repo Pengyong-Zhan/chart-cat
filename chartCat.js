@@ -671,3 +671,132 @@ Highcharts.chart('bubbleChart', {
       }
   }]
 });
+
+
+/////////////////////////////area line chart//////////////////////////////
+function lineChart(tempData, hour) {
+  Highcharts.chart("areaLineChart", {
+    chart: {
+      type: "areaspline",
+    },
+    title: {
+        text: 'Temperature in 24 Hours',
+    },
+    legend: {
+      enabled: false
+    },
+    xAxis: {
+      tickInterval: 1,
+      tickLength: 5,
+      labels: {
+        formatter: function () {
+          if (this.value > 24) {
+            return this.value - 24;
+          } else {
+            return this.value;
+          }
+        }
+      }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+          enabled: false,
+        },
+        gridLineWidth: 0
+    },
+    tooltip: {
+      enabled: false
+    },
+    credits: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            pointStart: hour,
+            pointInterval: 1,
+            dataLabels: {
+              enabled: true, 
+              format: "{point.y}"
+            }
+        },
+        areaspline: {
+            fillOpacity: 0.2
+        }
+    },
+    series: [{ 
+        name: "Temperature",
+        data: tempData
+    }]      
+  });
+}
+
+const tempData = [19, 19, 19, 18, 18, 17, 16, 15, 14, 13, 14, 15, 17, 19, 21, 22, 23, 25, 25, 25, 25, 25, 23, 21]
+const hour = 21
+lineChart(tempData, hour)
+
+
+/////////////////////////////map chart//////////////////////////////
+function chartInCallBack(dataForMapChart) {
+  const url = "https://code.highcharts.com/mapdata/countries/ca/ca-all.topo.json"; 
+  fetch(url)
+    .then(response => response.json()
+    )
+    .then(geojson => {
+      createMapChart("mapChart", geojson, dataForMapChart);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+
+function createMapChart(id, geoJSON, data) {
+  Highcharts.mapChart(id,{
+    chart: {
+      map: geoJSON,
+    },
+    title: {
+        text: 'Temperatures in Major Cities Across Canadian Provinces',
+    },
+    mapNavigation: {
+      enabled: true,
+      buttonOptions: {
+        verticalAlign: 'top',
+        align: 'right',
+        x: -10
+      }
+    },
+    colorAxis: {
+      minColor: "#E2F3FF",
+      maxColor: "#2CAFFE"
+    },
+    series: [{
+      data: data,
+      name: 'Temperature',
+      states: {
+        hover: {
+          color: '#e6ebf5'
+        }
+      },
+      dataLabels: {
+        enabled: true,
+          format: '{point.name}'
+      },
+      tooltip: {
+        pointFormat: '{point.name}: <b>{point.x}°C</b>'
+      },
+    }]      
+  });
+}
+
+const dataForMapChart = [
+  ['ca-bc', 22.51], ['ca-nu', 9.97], ['ca-nt', 24.1],
+  ['ca-ab', 21.57], ['ca-nl', 12.56], ['ca-sk', 16.95], ['ca-mb', 21.87],
+  ['ca-qc', 23.6], ['ca-on', 18.8], ['ca-nb', 20.62], ['ca-ns', 21],
+  ['ca-pe', 20], ['ca-yt', 18.43]
+]
+
+chartInCallBack(dataForMapChart)
