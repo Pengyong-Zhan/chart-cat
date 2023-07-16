@@ -22,7 +22,8 @@ Highcharts.chart("twoSidesBarChart", {
   accessibility: {
     point: {
         valueDescriptionFormat: '{index}. {xDescription}, {value}.'
-    }
+    },
+    description: 'Sales Amounts by Gender: Male vs Female',
   },
   plotOptions: {
     series: {
@@ -124,6 +125,12 @@ Highcharts.chart('pieChartWithDrilldown', {
   title : {
     text: 'Percentage of Sales by Category, June 2023',
   },
+  accessibility: {
+    description: 'Percentage of Sales by Category, June 2023',
+    point: {
+      valueDescriptionFormat: 'The percentage of {name} is {percentage}%.'
+    }
+  },
   plotOptions: {
     series: {
       dataLabels: {
@@ -177,6 +184,9 @@ Highcharts.chart('pieChartWithDrilldown', {
 Highcharts.chart('columnAndLine', {
   title: {
     text: 'Profit Margin and Sales Amounts by Gender'
+  },
+  accessibility: {
+    description: 'Profit Margin and Sales Amounts by Gender',
   },
   xAxis: {
     categories: categories,
@@ -267,6 +277,12 @@ Highcharts.chart("stackedColumn", {
     text: 'Students by Subjects at UK Uinversities, 2010-2011',
     margin: 20
   },
+  accessibility: {
+    description: 'Students by Subjects at UK Uinversities, 2010-2011',
+    point: {
+      valueDescriptionFormat: 'Student group {series.name} in the descipline of {category} is {y}.'
+    }
+  },
   xAxis: {
     categories: ['Business','Health allied','Education','Social studies','Biological studies','Arts and Design','Engineering','Languages','Combined subjects','Computing','History','Physical studies','Law','Medicine & dentistry','Architecture','Mass communication','Mathemetics','Agriculture','Veterinary science']
   },
@@ -328,6 +344,12 @@ Highcharts.chart("lineChart", {
   },
   title: {
     text: 'Harvard Admit Rate, 2009-2016',
+  },
+  accessibility: {
+    description: 'Harvard Admit Rate, 2009-2016',
+    point: {
+      valueDescriptionFormat: 'In year {x}, the admision rate of {seriesName} was {y}.'
+    }
   },
   xAxis: [
     {
@@ -431,6 +453,12 @@ Highcharts.chart('scatterChart', {
   },
   title: {
     text: 'Income and Happiness'
+  },
+  accessibility: {
+    description: 'Income and Happiness',
+    point: {
+      valueDescriptionFormat: 'With the income of {x}, the z-score of {seriesName} is {y}.'
+    }
   },
   xAxis: {
     title: {
@@ -628,6 +656,12 @@ Highcharts.chart('bubbleChart', {
   title: {
     text: 'Housing Prices, Area, and Age in Two Cities',
   },
+  accessibility: {
+    description: 'Housing Prices, Area, and Age in Two Cities',
+    point: {
+      valueDescriptionFormat: 'With {xDescription} years of construction, and area of {yDescription}) square meter, the estimated house property value is {value} in city {zDescription}.'
+    }
+  },
   xAxis: {
     gridLineWidth: 1,
     title: {
@@ -681,6 +715,12 @@ function lineChart(tempData, hour) {
     },
     title: {
         text: 'Temperature in 24 Hours',
+    },
+    accessibility: {
+      description: 'Temperature in 24 Hours',
+      point: {
+        valueDescriptionFormat: 'At {x} o\'clock, the temperature will be {y}.'
+      }
     },
     legend: {
       enabled: false
@@ -760,6 +800,10 @@ function createMapChart(id, geoJSON, data) {
     },
     title: {
         text: 'Temperatures in Major Cities Across Canadian Provinces',
+    },
+    accessibility: {
+      description: 'Temperatures in Major Cities Across Canadian Provinces',
+      valueDescriptionFormat: 'The temperature of major city in {point.name} is {point.value}.'
     },
     mapNavigation: {
       enabled: true,
